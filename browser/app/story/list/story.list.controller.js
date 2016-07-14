@@ -1,11 +1,11 @@
 'use strict';
 
-app.controller('StoryListCtrl', function ($scope, stories, Story, users) {
+app.controller('StoryListCtrl', function ($scope, stories, Story, users, Auth) {
   $scope.stories = stories;
   $scope.users = users;
 
   $scope.newStory = new Story();
-  
+
   $scope.removeStory = function (story) {
     story.destroy()
     .then(function () {
@@ -21,5 +21,7 @@ app.controller('StoryListCtrl', function ($scope, stories, Story, users) {
       $scope.newStory = new Story();
       $scope.stories.unshift(created);
     });
+
+      $scope.getCurrentUser = Auth.getCurrentUser;
   };
 });

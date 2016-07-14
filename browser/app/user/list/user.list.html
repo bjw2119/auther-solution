@@ -7,6 +7,7 @@
       glyphicon="search">
     </user-item>
     <user-item
+      ng-if="getCurrentUser().isAdmin"
       is-form
       model="userAdd"
       class="list-group-item min-content"

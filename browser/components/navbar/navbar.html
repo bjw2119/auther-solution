@@ -23,13 +23,13 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="currentUser" ui-sref-active="active">
+        <li ng-if="!getCurrentUser()" ui-sref-active="active">
           <a ui-sref="signup">signup</a>
         </li>
-        <li ng-hide="currentUser" ui-sref-active="active">
+        <li ng-if="!getCurrentUser()" ui-sref-active="active">
           <a ui-sref="login">login</a>
         </li>
-        <li ng-show="currentUser">
+        <li ng-if="getCurrentUser()">
           <button ng-click="submitLogout()" class="navbar-btn btn btn-default">logout</button>
         </li>
       </ul>

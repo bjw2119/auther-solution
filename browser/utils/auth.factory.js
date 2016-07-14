@@ -1,17 +1,19 @@
 'use strict';
 
-app.factory('Auth', function ($http, $rootScope) {
+app.factory('Auth', function ($http) {
+
+  var currentUser ={};
   return {
     login: function (info) {
       return $http.post('/auth/login', info)
       .then(function (response) {
-        $rootScope.currentUser = response.data;
+        currentUser = response.data;
       });
     },
     signup: function (info) {
       return $http.post('/auth/signup', info)
       .then(function (response) {
-        $rootScope.currentUser = response.data;
+        currentUser = response.data;
       });;
     },
     fetchCurrentUser: function () {
@@ -23,8 +25,9 @@ app.factory('Auth', function ($http, $rootScope) {
     logout: function () {
       return $http.get('/auth/logout')
       .then(function () {
-        $rootScope.currentUser = null;
+        currentUser = null;
       });
-    }
+    },
+    getCurrentUser: function(){return currentUser;}
   }
 });

@@ -45,7 +45,7 @@
           </select>
         </li>
       </ul>
-      <button class="btn btn-warning btn-xs" ng-click="addStory()">
+      <button ng-if="getCurrentUser()" class="btn btn-warning btn-xs" ng-click="addStory()">
         <span class="glyphicon glyphicon-plus"></span>
       </button>
     </li>
@@ -63,7 +63,7 @@
           <a ui-sref="user({id: story.author_id})">{{ story.author.name }}</a>
         </li>
       </ul>
-      <button class="btn btn-default btn-xs" ng-click="removeStory(story)">
+      <button class="btn btn-default btn-xs" ng-click="removeStory(story)" ng-if="$getCurrentUser().id === story.author_id || $getCurrentUser().isAdmin">
         <span class="glyphicon glyphicon-remove"></span>
       </button>
     </li>

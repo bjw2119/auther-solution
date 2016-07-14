@@ -5,6 +5,7 @@ app.factory('User', function ($http, Story) {
     angular.extend(this, props);
   }
 
+  var currentUser = {};
   User.url = '/api/users/';
 
   User.prototype.getUrl = function () {
@@ -47,13 +48,17 @@ app.factory('User', function ($http, Story) {
     }
     return $http[verb](url, this)
     .then(function (res) {
+      currentUser = res.data;
       return new User(res.data);
     });
   };
 
   User.prototype.destroy = function () {
+    currentUser = {};
     return $http.delete(this.getUrl());
   };
+
+  User.getCurrentUser = function(){return currentUser;}
 
   return User;
 });

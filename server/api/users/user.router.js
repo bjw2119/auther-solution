@@ -17,7 +17,8 @@ router.param('id', function (req, res, next, id) {
 });
 
 router.get('/', function (req, res, next) {
-  User.findAll({})
+
+    User.findAll({})
   .then(function (users) {
     res.json(users);
   })
@@ -41,19 +42,23 @@ router.get('/:id', function (req, res, next) {
 });
 
 router.put('/:id', function (req, res, next) {
+  if(req.user.id === req.body.author_id){
   req.requestedUser.update(req.body)
   .then(function (user) {
     res.json(user);
   })
-  .catch(next);
+  .catch(next);}
+  else res.sendStatus(403);
 });
 
 router.delete('/:id', function (req, res, next) {
+  if(req.user.id === req.params.id){
   req.requestedUser.destroy()
   .then(function () {
     res.status(204).end();
   })
-  .catch(next);
+  .catch(next);}
+  else res.sendStatus(403);
 });
 
 module.exports = router;
